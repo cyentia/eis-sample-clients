@@ -1,2 +1,3 @@
+# Don't use the python directory when calculating gighub lanugage stats
 python/** linguist-vendored
 
