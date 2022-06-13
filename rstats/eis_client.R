@@ -1,23 +1,24 @@
 library(here)     # for file directory locations
 library(dplyr)    # for pipe operations
 library(jsonlite) # for JSON manipulations
+library(httr)     # for web functions
 
 # define our Oauth Client, note that secret is not truly secret
 eis_app <- function() {
-  httr::oauth_app("eis", key = <provided_client_id>,
-                secret = <provided_client_secret>)
+  oauth_app("eis", key = <provided_client_id>,
+            secret = <provided_client_secret>)
 }
 
 # define the endpoints for EIS
 eis_auth_endpoints <- function() {
-  httr::oauth_endpoint(
+  oauth_endpoint(
     authorize = "https://auth.cyentia.com/authorize?audience=https://eis-api.cyentia.com",
     access = "https://auth.cyentia.com/oauth/token")
 }
 
 # Fetch an Oauth access token, with caching
 eis_api_token <- function() {
-  httr::oauth2.0_token(
+  oauth2.0_token(
     endpoint = eis_auth_endpoints(),
     app = eis_app(),
     config_init = httr::user_agent("httr"),
